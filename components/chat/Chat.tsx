@@ -33,36 +33,38 @@ export default function Chat() {
   const { ready, initialMessages, storeMessageHistory } = useChatHistory(parsedId);
 
   return (
-    <>
-      {ready && <ChatImpl initialMessages={initialMessages} storeMessageHistory={storeMessageHistory} />}
-      <ToastContainer
-        closeButton={({ closeToast }) => {
-          return (
-            <button className="Toastify__close-button" onClick={closeToast}>
-              <div className="i-ph:x text-lg" />
-            </button>
-          );
-        }}
-        icon={({ type }) => {
-          /**
-           * @todo Handle more types if we need them. This may require extra color palettes.
-           */
-          switch (type) {
-            case 'success': {
-              return <Check className="text-green-500 text-2xl" />;
+    <div className="flex h-screen">
+      <div className="flex-1 flex flex-col">
+        {ready && <ChatImpl initialMessages={initialMessages} storeMessageHistory={storeMessageHistory} />}
+        <ToastContainer
+          closeButton={({ closeToast }) => {
+            return (
+              <button className="Toastify__close-button" onClick={closeToast}>
+                <div className="i-ph:x text-lg" />
+              </button>
+            );
+          }}
+          icon={({ type }) => {
+            /**
+             * @todo Handle more types if we need them. This may require extra color palettes.
+             */
+            switch (type) {
+              case 'success': {
+                return <Check className="text-green-500 text-2xl" />;
+              }
+              case 'error': {
+                return <WarningCircle className="text-destructive text-2xl" />;
+              }
             }
-            case 'error': {
-              return <WarningCircle className="text-destructive text-2xl" />;
-            }
-          }
 
-          return undefined;
-        }}
-        position="bottom-right"
-        pauseOnFocusLoss
-        transition={toastAnimation}
-      />
-    </>
+            return undefined;
+          }}
+          position="bottom-right"
+          pauseOnFocusLoss
+          transition={toastAnimation}
+        />
+      </div>
+    </div>
   );
 }
 

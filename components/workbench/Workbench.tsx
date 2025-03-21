@@ -22,6 +22,7 @@ import { Drawer, DrawerContent } from '@/components/ui/drawer';
 import { useSidebar } from '../ui/sidebar';
 import { XCircle } from '@phosphor-icons/react';
 import { toast } from '@/hooks/use-toast';
+import { DownloadButton } from '../download/DownloadButton';
 
 interface WorkspaceProps {
   chatStarted?: boolean;
@@ -141,6 +142,14 @@ export const Workbench = memo(({ chatStarted, isStreaming, className }: Workspac
     workbenchStore.resetCurrentDocument();
   }, []);
 
+  // Add this function to convert files to the correct format
+  const getDownloadableFiles = useMemo(() => {
+    return Object.entries(files).map(([path, content]) => ({
+      path,
+      content: typeof content === 'string' ? content : (content && 'content' in content ? content.content : '')
+    }));
+  }, [files]);
+
   const innerWorkbench = (
     <div
           className={
@@ -168,15 +177,17 @@ export const Workbench = memo(({ chatStarted, isStreaming, className }: Workspac
           </div>}
          
         <div className={`w-full h-full flex flex-col bg-white/5  backdrop-blur-sm border  shadow-sm rounded-${isMobile ? 'none rounded-t-lg' : 'lg'} overflow-hidden`}>
-          <div className="flex items-center px-3 py-2 border-b ">
+          <div className="flex items-center justify-between px-3 py-2 border-b">
             <Slider selected={selectedView} options={sliderOptions} setSelected={setSelectedView} />
-            <div className="ml-auto" />
-            <XCircle
-              className="-mr-1 cursor-pointer text-lg"
-              onClick={() => {
-                workbenchStore.showWorkbench.set(false);
-              }}
-            />
+            <div className="flex items-center gap-3">
+              <DownloadButton files={getDownloadableFiles} />
+              <XCircle
+                className="cursor-pointer text-lg"
+                onClick={() => {
+                  workbenchStore.showWorkbench.set(false);
+                }}
+              />
+            </div>
           </div>
           <div className="relative flex-1 overflow-hidden h-full">
             <View

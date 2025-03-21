@@ -17,7 +17,12 @@ export interface StartAction extends BaseAction {
   type: 'start';
 }
 
-export type BoltNextAction = FileAction | ShellAction | StartAction ;
+export interface DownloadAction extends BaseAction {
+  type: 'download';
+  fileName?: string;
+}
+
+export type BoltNextAction = FileAction | ShellAction | StartAction | DownloadAction;
 
 export type BoltNextActionData = BoltNextAction | BaseAction;
 
