@@ -38,7 +38,7 @@ import { Heart, Notebook } from "@phosphor-icons/react"
 import { HistoryItem } from "./HistoryItem"
 import { DialogRoot, DialogButton, Dialog, DialogTitle, DialogDescription } from "../ui/OldDialog"
 import { binDates } from "./date-binning"
-import { anthropicModels, setProvider, ProviderType, googleModels, togetherModels, type Model } from "@/lib/stores/provider"
+import { anthropicModels, setProvider, ProviderType, googleModels, togetherModels } from "@/lib/stores/provider"
 import { GithubLogo } from "@phosphor-icons/react/dist/ssr"
 
 type DialogContent = { type: 'delete'; item: ChatHistoryItem } | null;
@@ -95,11 +95,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     }
   }, [showChat])
 
-  const handleNewProject = () => {
-    chatStore.set({ started: false, aborted: false, showChat: true });
-    window.location.pathname = '/';
-  };
-
   const data = {
     user: {
       name: "KevIsDev",
@@ -117,7 +112,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             title: "New Project",
             url: "#",
             icon: PartyPopper,
-            onClick: handleNewProject
           }
         ],
       },
@@ -187,7 +181,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               </div>
             ))}
             <div className="text-xs text-muted text-start">Google Models</div>
-            {googleModels.map((model: Model) => (
+            {googleModels.map((model) => (
               <div
                 key={model.id}
                 className="!w-full py-1 cursor-pointer text-start text-foreground hover:text-accent hover:scale-105"
