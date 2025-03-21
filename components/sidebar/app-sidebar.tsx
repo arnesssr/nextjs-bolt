@@ -109,13 +109,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         isActive: true,
         items: [
           {
-            title: "Starred",
+            title: "New Project",
             url: "#",
-          },
-          {
-            title: "Settings",
-            url: "#",
-          },
+            icon: PartyPopper,
+          }
         ],
       },
       {
