@@ -1,27 +1,7 @@
 "use client"
 
 import * as React from "react"
-import {
-  Bot,
-  History,
-  PlusCircle,
-  Cog,
-  Palette,
-  KeyRound,
-  Code2,
-  Library,
-  Wrench,
-  LayoutTemplate,
-  FileCode,
-  Boxes,
-  Key,
-  Gauge,
-  Network,
-  Settings,
-  MonitorSmartphone,
-  Brush,
-  PaintBucket
-} from "lucide-react"
+import { Bot, History, PlusCircle, Cog } from "lucide-react"
 
 import { NavMain } from "@/components/sidebar/nav-main"
 import {
@@ -116,7 +96,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       {
         title: "History",
         icon: History,
-        items:  [
+        items: [
           <div className="!bg-background !hover:bg-background !active:bg-background flex items-center h-full w-full justify-between max-w-full">
             {list.length === 0 && <div className="text-foreground">No previous conversations</div>}
             <DialogRoot open={dialogContent !== null}>
@@ -165,91 +145,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       },
       {
         title: "Settings",
+        url: "/settings",
         icon: Cog,
-        items: [
-          {
-            title: "Models",
-            icon: Bot,
-            items: [
-              <div key="models-container" className="!bg-background !hover:bg-background active:bg-background flex flex-col !w-full h-full items-center justify-center">
-                <div className="text-xs text-muted text-start">Anthropic Models</div>
-                {anthropicModels.map((model) => (
-                  <div
-                    key={model.id}
-                    className="!w-full py-1 cursor-pointer text-start text-foreground hover:text-accent hover:scale-105"
-                    onClick={() => setProvider({ type: ProviderType.ANTHROPIC, model })}
-                  >
-                    {model.displayName}
-                  </div>
-                ))}
-                <div className="text-xs text-muted text-start">Google Models</div>
-                {googleModels.map((model) => (
-                  <div
-                    key={model.id}
-                    className="!w-full py-1 cursor-pointer text-start text-foreground hover:text-accent hover:scale-105"
-                    onClick={() => setProvider({ type: ProviderType.GOOGLE, model })}
-                  >
-                    {model.displayName}
-                  </div>
-                ))}
-                <div className="text-xs text-muted text-start">TogetherAI Models</div>
-                {togetherModels.map((model) => (
-                  <div
-                    key={model.id}
-                    className="!w-full py-1 cursor-pointer text-start text-foreground hover:text-accent hover:scale-105"
-                    onClick={() => setProvider({ type: ProviderType.TOGETHER, model })}
-                  >
-                    {model.displayName}
-                  </div>
-                ))}
-              </div>
-            ]
-          },
-          {
-            title: "Knowledge Base",
-            icon: Library,
-            items: [
-              <div key="kb-container" className="!bg-background !hover:bg-background active:bg-background flex flex-col !w-full h-full p-2">
-                <div className="text-xs text-muted mb-2 flex items-center gap-2"><LayoutTemplate size={14} /> Project Templates</div>
-                <div className="text-xs text-muted mb-2 flex items-center gap-2"><FileCode size={14} /> Framework Guides</div>
-                <div className="text-xs text-muted mb-2 flex items-center gap-2"><Code2 size={14} /> Best Practices</div>
-              </div>
-            ]
-          },
-          {
-            title: "API Configuration",
-            icon: Wrench,
-            items: [
-              <div key="api-config" className="!bg-background !hover:bg-background active:bg-background flex flex-col !w-full h-full p-2">
-                <div className="text-xs text-muted mb-2 flex items-center gap-2"><Key size={14} /> API Keys</div>
-                <div className="text-xs text-muted mb-2 flex items-center gap-2"><Gauge size={14} /> Rate Limits</div>
-                <div className="text-xs text-muted mb-2 flex items-center gap-2"><Network size={14} /> Endpoints</div>
-              </div>
-            ]
-          },
-          {
-            title: "Project Settings",
-            icon: Settings,
-            items: [
-              <div key="project-settings" className="!bg-background !hover:bg-background active:bg-background flex flex-col !w-full h-full p-2">
-                <div className="text-xs text-muted mb-2 flex items-center gap-2"><Boxes size={14} /> Default Framework</div>
-                <div className="text-xs text-muted mb-2 flex items-center gap-2"><Code2 size={14} /> Build Configuration</div>
-                <div className="text-xs text-muted mb-2 flex items-center gap-2"><Network size={14} /> Deploy Settings</div>
-              </div>
-            ]
-          },
-          {
-            title: "Theme",
-            icon: Palette,
-            items: [
-              <div key="theme-settings" className="!bg-background !hover:bg-background active:bg-background flex flex-col !w-full h-full p-2">
-                <div className="text-xs text-muted mb-2 flex items-center gap-2"><MonitorSmartphone size={14} /> Dark/Light Mode</div>
-                <div className="text-xs text-muted mb-2 flex items-center gap-2"><Brush size={14} /> Code Editor Theme</div>
-                <div className="text-xs text-muted mb-2 flex items-center gap-2"><PaintBucket size={14} /> UI Customization</div>
-              </div>
-            ]
-          }
-        ],
+        items: [] // Removed dropdown items since we now have a dedicated settings page
       }
     ],
     navSecondary: [] // Empty array since we don't need secondary nav
