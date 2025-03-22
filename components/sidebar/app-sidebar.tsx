@@ -13,6 +13,7 @@ import {
   Send,
   Settings2,
   StarIcon,
+  PlusCircle,
 } from "lucide-react"
 
 import { NavMain } from "@/components/sidebar/nav-main"
@@ -95,6 +96,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     }
   }, [showChat])
 
+  const startNewChat = useCallback(() => {
+    // Clear chat history and redirect to home
+    chatStore.setKey('started', false);
+    chatId.set(undefined);
+    window.location.pathname = '/';
+  }, []);
+
   const data = {
     user: {
       name: "KevIsDev",
@@ -103,17 +111,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     },
     navMain: [
       {
-        title: "Chat",
-        url: "/",
-        icon: BotMessageSquare,
+        title: "New Project", // Changed from "New Chat" to "New Project"
+        url: "#",          // Changed from "/" to "#" since we're using onClick
+        icon: PlusCircle,  // Using PlusCircle as the main icon
         isActive: true,
-        items: [
-          {
-            title: "New Project",
-            url: "#",
-            icon: PartyPopper,
-          }
-        ],
+        onClick: startNewChat, // Add onClick directly to the main item
+        items: []          // Remove sub-items since we want the main button to trigger new chat
       },
       {
         title: "History",
