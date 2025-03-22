@@ -2,44 +2,30 @@
 
 import * as React from "react"
 import {
-  BookOpen,
   Bot,
-  BotMessageSquare,
   History,
-  LifeBuoy,
-  Map,
-  PartyPopper,
-  PieChart,
-  Send,
-  Settings2,
-  StarIcon,
+  PlusCircle,
+  Cog,
 } from "lucide-react"
 
 import { NavMain } from "@/components/sidebar/nav-main"
-import { NavProjects } from "@/components/sidebar/nav-projects"
-import { NavSecondary } from "@/components/sidebar/nav-secondary"
-import { NavUser } from "@/components/sidebar/nav-user"
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import Image from "next/image"
-import {  chatId, deleteById, getAll, getDb, type ChatHistoryItem } from '@/persistance';
+import { chatId, deleteById, getAll, getDb, type ChatHistoryItem } from '@/persistance';
 import { chatStore } from "@/lib/stores/chat"
 import { useStore } from "@nanostores/react"
 import { toast } from "react-toastify"
 import { useCallback, useEffect, useState } from "react"
-import { Heart, Notebook } from "@phosphor-icons/react"
 import { HistoryItem } from "./HistoryItem"
 import { DialogRoot, DialogButton, Dialog, DialogTitle, DialogDescription } from "../ui/OldDialog"
 import { binDates } from "./date-binning"
 import { anthropicModels, setProvider, ProviderType, googleModels, togetherModels } from "@/lib/stores/provider"
-import { GithubLogo } from "@phosphor-icons/react/dist/ssr"
 
 type DialogContent = { type: 'delete'; item: ChatHistoryItem } | null;
 
@@ -95,25 +81,22 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     }
   }, [showChat])
 
+  const startNewChat = useCallback(() => {
+    // Clear chat history and redirect to home
+    chatStore.setKey('started', false);
+    chatId.set(undefined);
+    window.location.pathname = '/';
+  }, []);
+
   const data = {
-    user: {
-      name: "KevIsDev",
-      email: "madeby@kevisdev.tech",
-      avatar: "/replace-with-your-avatar.jpg",
-    },
     navMain: [
       {
-        title: "Chat",
-        url: "/",
-        icon: BotMessageSquare,
+        title: "New Project",
+        url: "#",
+        icon: PlusCircle,
         isActive: true,
-        items: [
-          {
-            title: "New Project",
-            url: "#",
-            icon: PartyPopper,
-          }
-        ],
+        onClick: startNewChat,
+        items: []
       },
       {
         title: "History",
@@ -166,114 +149,50 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         ],
       },
       {
-        title: "Models",
-        icon: Bot,
-        items: [
-          <div key="models-container" className="!bg-background !hover:bg-background active:bg-background flex flex-col !w-full h-full items-center justify-center">
-            <div className="text-xs text-muted text-start">Anthropic Models</div>
-            {anthropicModels.map((model) => (
-              <div
-                key={model.id}
-                className="!w-full py-1 cursor-pointer text-start text-foreground hover:text-accent hover:scale-105"
-                onClick={() => setProvider({ type: ProviderType.ANTHROPIC, model })}
-              >
-                {model.displayName}
-              </div>
-            ))}
-            <div className="text-xs text-muted text-start">Google Models</div>
-            {googleModels.map((model) => (
-              <div
-                key={model.id}
-                className="!w-full py-1 cursor-pointer text-start text-foreground hover:text-accent hover:scale-105"
-                onClick={() => setProvider({ type: ProviderType.GOOGLE, model })}
-              >
-                {model.displayName}
-              </div>
-            ))}
-            <div className="text-xs text-muted text-start">TogetherAI Models</div>
-            {togetherModels.map((model) => (
-              <div
-                key={model.id}
-                className="!w-full py-1 cursor-pointer text-start text-foreground hover:text-accent hover:scale-105"
-                onClick={() => setProvider({ type: ProviderType.TOGETHER, model })}
-              >
-                {model.displayName}
-              </div>
-            ))}
-          </div>,
-        ],
-      },
-      {
-        title: "Documentation",
-        url: "#",
-        icon: BookOpen,
-        items: [
-          {
-            title: "Introduction",
-            url: "#",
-          },
-          {
-            title: "Get Started",
-            url: "#",
-          },
-          {
-            title: "Tutorials",
-            url: "#",
-          },
-          {
-            title: "Changelog",
-            url: "#",
-          },
-        ],
-      },
-      {
         title: "Settings",
-        url: "#",
-        icon: Settings2,
+        icon: Cog,
         items: [
           {
-            title: "General",
-            url: "#",
-          },
-          {
-            title: "Team",
-            url: "#",
-          },
-          {
-            title: "Billing",
-            url: "#",
-          },
-          {
-            title: "Limits",
-            url: "#",
-          },
+            title: "Models",
+            items: [
+              <div key="models-container" className="!bg-background !hover:bg-background active:bg-background flex flex-col !w-full h-full items-center justify-center">
+                <div className="text-xs text-muted text-start">Anthropic Models</div>
+                {anthropicModels.map((model) => (
+                  <div
+                    key={model.id}
+                    className="!w-full py-1 cursor-pointer text-start text-foreground hover:text-accent hover:scale-105"
+                    onClick={() => setProvider({ type: ProviderType.ANTHROPIC, model })}
+                  >
+                    {model.displayName}
+                  </div>
+                ))}
+                <div className="text-xs text-muted text-start">Google Models</div>
+                {googleModels.map((model) => (
+                  <div
+                    key={model.id}
+                    className="!w-full py-1 cursor-pointer text-start text-foreground hover:text-accent hover:scale-105"
+                    onClick={() => setProvider({ type: ProviderType.GOOGLE, model })}
+                  >
+                    {model.displayName}
+                  </div>
+                ))}
+                <div className="text-xs text-muted text-start">TogetherAI Models</div>
+                {togetherModels.map((model) => (
+                  <div
+                    key={model.id}
+                    className="!w-full py-1 cursor-pointer text-start text-foreground hover:text-accent hover:scale-105"
+                    onClick={() => setProvider({ type: ProviderType.TOGETHER, model })}
+                  >
+                    {model.displayName}
+                  </div>
+                ))}
+              </div>
+            ]
+          }
         ],
-      },
+      }
     ],
-    navSecondary: [
-      {
-        title: "Github",
-        url: "https://github.com/xKevIsDev/",
-        target: "_blank",
-        icon: GithubLogo,
-      },
-      {
-        title: "Sponsor",
-        url: "https://github.com/sponsors/xKevIsDev/",
-        target: "_blank",
-        icon: Heart,
-      },
-      {
-        title: "Support",
-        url: "#",
-        icon: LifeBuoy,
-      },
-      {
-        title: "Feedback",
-        url: "#",
-        icon: Send,
-      },
-    ],
+    navSecondary: [] // Empty array since we don't need secondary nav
   }
 
   return (
@@ -283,13 +202,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
               <a href="/" className="">
-              <div>
-                <h1 className="font-paytone font-bold text-3xl tracking-tight flex gap-0.2 text-foreground/80">
-                  <span>BOLT</span>
-                  <span className="text-accent">.</span>
-                  <span className="ml-1">NEXT</span>
-                </h1>
-              </div>
+                <div>
+                  <h1 className="font-paytone font-bold text-3xl tracking-tight flex gap-0.2 text-foreground/80">
+                    <span>BOLT</span>
+                    <span className="text-accent">.</span>
+                    <span className="ml-1">NEXT</span>
+                  </h1>
+                </div>
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -297,11 +216,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
-        <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
-      <SidebarFooter>
-        <NavUser user={data.user} />
-      </SidebarFooter>
     </Sidebar>
   )
 }

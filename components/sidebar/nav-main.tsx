@@ -2,6 +2,8 @@
 
 import { ChevronRight, type LucideIcon } from "lucide-react"
 import * as React from "react"
+import { cn } from "@/lib/utils"
+import { useRouter } from "next/navigation"
 import {
   Collapsible,
   CollapsibleContent,
@@ -24,26 +26,29 @@ interface NavItem {
   url?: string;
 }
 
-interface NavMainProps {
+interface NavMainProps extends React.HTMLAttributes<HTMLDivElement> {
   items: {
     title: string;
     url?: string;
     icon: LucideIcon;
     isActive?: boolean;
+    onClick?: () => void;
     items?: (NavItem | React.ReactNode)[];
   }[];
 }
 
 export function NavMain({
   items,
+  className,
+  ...props
 }: NavMainProps) {
   return (
     <SidebarGroup>
       <SidebarGroupLabel>Platform</SidebarGroupLabel>
       <SidebarMenu>
-        {items.map((item) => (
+        {items.map((item, index) => (
           <Collapsible key={item.title} asChild defaultOpen={item.isActive}>
-            <SidebarMenuItem>
+            <SidebarMenuItem onClick={item.onClick}>
               <SidebarMenuButton asChild tooltip={item.title}>
                 <a href={item.url}>
                   <item.icon />
