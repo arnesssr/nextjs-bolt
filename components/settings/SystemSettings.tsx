@@ -97,46 +97,27 @@ export function SystemSettings() {
           <CardDescription>Configure your infrastructure settings</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          {/* Hosting Provider Section */}
+          {/* Deployment Section */}
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Desktop className="h-5 w-5" />
                 <div className="flex flex-col">
-                  <span>Hosting Provider</span>
-                  <span className="text-sm text-muted-foreground">Configure your hosting environment</span>
+                  <span>Deployment Platform</span>
+                  <span className="text-sm text-muted-foreground">Configure your deployment settings</span>
                 </div>
               </div>
-              <Select defaultValue="aws">
-                <SelectTrigger className="w-[180px]">
-                  <SelectValue placeholder="Select provider" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="aws">AWS</SelectItem>
-                  <SelectItem value="gcp">Google Cloud</SelectItem>
-                  <SelectItem value="azure">Azure</SelectItem>
-                  <SelectItem value="custom">Custom</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            {/* Resource Configuration */}
-            <div className="space-y-2 pl-7">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <CpuIcon className="h-4 w-4" />
-                  <span>CPU & Memory</span>
-                </div>
-                <Select defaultValue="2">
-                  <SelectTrigger className="w-[100px]">
-                    <SelectValue />
+              <div className="flex items-center gap-2">
+                <Select defaultValue="vercel">
+                  <SelectTrigger className="w-[180px]">
+                    <SelectValue placeholder="Select platform" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="1">1 Core - 2GB</SelectItem>
-                    <SelectItem value="2">2 Cores - 4GB</SelectItem>
-                    <SelectItem value="4">4 Cores - 8GB</SelectItem>
+                    <SelectItem value="vercel">Vercel</SelectItem>
+                    <SelectItem value="netlify">Netlify</SelectItem>
                   </SelectContent>
                 </Select>
+                <Button variant="outline" size="sm">Configure</Button>
               </div>
             </div>
           </div>
