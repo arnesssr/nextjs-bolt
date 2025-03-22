@@ -6,6 +6,21 @@ import {
   History,
   PlusCircle,
   Cog,
+  Palette,
+  KeyRound,
+  Code2,
+  Library,
+  Wrench,
+  LayoutTemplate,
+  FileCode,
+  Boxes,
+  Key,
+  Gauge,
+  Network,
+  Settings,
+  MonitorSmartphone,
+  Brush,
+  PaintBucket
 } from "lucide-react"
 
 import { NavMain } from "@/components/sidebar/nav-main"
@@ -154,6 +169,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         items: [
           {
             title: "Models",
+            icon: Bot,
             items: [
               <div key="models-container" className="!bg-background !hover:bg-background active:bg-background flex flex-col !w-full h-full items-center justify-center">
                 <div className="text-xs text-muted text-start">Anthropic Models</div>
@@ -191,41 +207,45 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           },
           {
             title: "Knowledge Base",
+            icon: Library,
             items: [
               <div key="kb-container" className="!bg-background !hover:bg-background active:bg-background flex flex-col !w-full h-full p-2">
-                <div className="text-xs text-muted mb-2">Project Templates</div>
-                <div className="text-xs text-muted mb-2">Framework Guides</div>
-                <div className="text-xs text-muted mb-2">Best Practices</div>
+                <div className="text-xs text-muted mb-2 flex items-center gap-2"><LayoutTemplate size={14} /> Project Templates</div>
+                <div className="text-xs text-muted mb-2 flex items-center gap-2"><FileCode size={14} /> Framework Guides</div>
+                <div className="text-xs text-muted mb-2 flex items-center gap-2"><Code2 size={14} /> Best Practices</div>
               </div>
             ]
           },
           {
             title: "API Configuration",
+            icon: Wrench,
             items: [
               <div key="api-config" className="!bg-background !hover:bg-background active:bg-background flex flex-col !w-full h-full p-2">
-                <div className="text-xs text-muted mb-2">API Keys</div>
-                <div className="text-xs text-muted mb-2">Rate Limits</div>
-                <div className="text-xs text-muted mb-2">Endpoints</div>
+                <div className="text-xs text-muted mb-2 flex items-center gap-2"><Key size={14} /> API Keys</div>
+                <div className="text-xs text-muted mb-2 flex items-center gap-2"><Gauge size={14} /> Rate Limits</div>
+                <div className="text-xs text-muted mb-2 flex items-center gap-2"><Network size={14} /> Endpoints</div>
               </div>
             ]
           },
           {
             title: "Project Settings",
+            icon: Settings,
             items: [
               <div key="project-settings" className="!bg-background !hover:bg-background active:bg-background flex flex-col !w-full h-full p-2">
-                <div className="text-xs text-muted mb-2">Default Framework</div>
-                <div className="text-xs text-muted mb-2">Build Configuration</div>
-                <div className="text-xs text-muted mb-2">Deploy Settings</div>
+                <div className="text-xs text-muted mb-2 flex items-center gap-2"><Boxes size={14} /> Default Framework</div>
+                <div className="text-xs text-muted mb-2 flex items-center gap-2"><Code2 size={14} /> Build Configuration</div>
+                <div className="text-xs text-muted mb-2 flex items-center gap-2"><Network size={14} /> Deploy Settings</div>
               </div>
             ]
           },
           {
             title: "Theme",
+            icon: Palette,
             items: [
               <div key="theme-settings" className="!bg-background !hover:bg-background active:bg-background flex flex-col !w-full h-full p-2">
-                <div className="text-xs text-muted mb-2">Dark/Light Mode</div>
-                <div className="text-xs text-muted mb-2">Code Editor Theme</div>
-                <div className="text-xs text-muted mb-2">UI Customization</div>
+                <div className="text-xs text-muted mb-2 flex items-center gap-2"><MonitorSmartphone size={14} /> Dark/Light Mode</div>
+                <div className="text-xs text-muted mb-2 flex items-center gap-2"><Brush size={14} /> Code Editor Theme</div>
+                <div className="text-xs text-muted mb-2 flex items-center gap-2"><PaintBucket size={14} /> UI Customization</div>
               </div>
             ]
           }
