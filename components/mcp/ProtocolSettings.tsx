@@ -1,4 +1,4 @@
-import { Database, FileText, Globe, Layout } from 'lucide-react';
+import { Database, Files, Globe, SquaresFour } from '@phosphor-icons/react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Switch } from '@/components/ui/switch';
 import { useMCPSettings } from '@/hooks/settings/useMCPSettings';
@@ -15,10 +15,10 @@ export function ProtocolSettings() {
         {Object.entries(config.protocols).map(([key, enabled]) => (
           <div key={key} className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              {key === 'fileAccess' && <FileText className="h-5 w-5" />}
+              {key === 'fileAccess' && <Files className="h-5 w-5" />}
               {key === 'databaseConnections' && <Database className="h-5 w-5" />}
               {key === 'apiIntegrations' && <Globe className="h-5 w-5" />}
-              {key === 'contextualServices' && <Layout className="h-5 w-5" />}
+              {key === 'contextualServices' && <SquaresFour className="h-5 w-5" />}
               <span>{key}</span>
             </div>
             <Switch 

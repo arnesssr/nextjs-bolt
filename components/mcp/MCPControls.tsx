@@ -1,4 +1,4 @@
-import { Globe } from 'lucide-react';
+import { Globe } from '@phosphor-icons/react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Switch } from '@/components/ui/switch';
 import { useMCPSettings } from '@/hooks/settings/useMCPSettings';

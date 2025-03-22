@@ -1,4 +1,4 @@
-import { Activity } from 'lucide-react';
+import { Activity } from '@phosphor-icons/react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useMCPSettings } from '@/hooks/settings/useMCPSettings';
 

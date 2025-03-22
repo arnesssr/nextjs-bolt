@@ -1,12 +1,7 @@
-// Implement settings layout
-
-// filepath: c:\Users\user\Downloads\Bolt.new-ALL-LLM-main\Bolt.new-ALL-LLM-main\nextjs-bolt\app\settings\page.tsx
-// Implement settings landing page
-
 export default function SettingsLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <div className="container relative">
@@ -14,5 +9,5 @@ export default function SettingsLayout({
         <div className="flex-1">{children}</div>
       </div>
     </div>
-  )
+  );
 }
