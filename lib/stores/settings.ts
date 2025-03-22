@@ -1,5 +1,4 @@
-import { atom } from 'nanostores';
-import { map } from 'nanostores';
+import { atom, map } from 'nanostores';
 import { workbenchStore } from './workbench';
 
 export interface Shortcut {
@@ -79,6 +78,16 @@ export interface MCPConfig {
   };
 }
 
+// Create separate shortcuts store
+export const shortcutsStore = map<Shortcuts>({
+  toggleTerminal: {
+    key: 'j',
+    ctrlOrMetaKey: true,
+    action: () => workbenchStore.toggleTerminal(),
+  },
+});
+
+// Main settings store
 export const settingsStore = {
   theme: atom<ThemeConfig>({
     mode: 'dark',
@@ -138,13 +147,9 @@ export const settingsStore = {
     templates: [],
     guides: [],
     practices: []
-  }),
-  shortcuts: map<Shortcuts>({
-    toggleTerminal: {
-      key: 'j',
-      ctrlOrMetaKey: true,
-      action: () => workbenchStore.toggleTerminal(),
-    },
   })
 };
+
+// Export shortcuts store separately
+export { shortcutsStore as shortcuts };
 

@@ -21,14 +21,14 @@ class ShortcutEventEmitter {
 export const shortcutEventEmitter = new ShortcutEventEmitter();
 
 export function useShortcuts(): void {
-  const shortcuts = useStore(shortcutsStore);
+  const shortcutsConfig = useStore(shortcutsStore);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent): void => {
       const { key, ctrlKey, shiftKey, altKey, metaKey } = event;
 
-      for (const name in shortcuts) {
-        const shortcut = shortcuts[name as keyof Shortcuts];
+      for (const name in shortcutsConfig) {
+        const shortcut = shortcutsConfig[name as keyof Shortcuts];
 
         if (
           shortcut.key.toLowerCase() === key.toLowerCase() &&
@@ -55,5 +55,5 @@ export function useShortcuts(): void {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [shortcuts]);
+  }, [shortcutsConfig]);
 }
