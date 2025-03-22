@@ -188,6 +188,46 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 ))}
               </div>
             ]
+          },
+          {
+            title: "Knowledge Base",
+            items: [
+              <div key="kb-container" className="!bg-background !hover:bg-background active:bg-background flex flex-col !w-full h-full p-2">
+                <div className="text-xs text-muted mb-2">Project Templates</div>
+                <div className="text-xs text-muted mb-2">Framework Guides</div>
+                <div className="text-xs text-muted mb-2">Best Practices</div>
+              </div>
+            ]
+          },
+          {
+            title: "API Configuration",
+            items: [
+              <div key="api-config" className="!bg-background !hover:bg-background active:bg-background flex flex-col !w-full h-full p-2">
+                <div className="text-xs text-muted mb-2">API Keys</div>
+                <div className="text-xs text-muted mb-2">Rate Limits</div>
+                <div className="text-xs text-muted mb-2">Endpoints</div>
+              </div>
+            ]
+          },
+          {
+            title: "Project Settings",
+            items: [
+              <div key="project-settings" className="!bg-background !hover:bg-background active:bg-background flex flex-col !w-full h-full p-2">
+                <div className="text-xs text-muted mb-2">Default Framework</div>
+                <div className="text-xs text-muted mb-2">Build Configuration</div>
+                <div className="text-xs text-muted mb-2">Deploy Settings</div>
+              </div>
+            ]
+          },
+          {
+            title: "Theme",
+            items: [
+              <div key="theme-settings" className="!bg-background !hover:bg-background active:bg-background flex flex-col !w-full h-full p-2">
+                <div className="text-xs text-muted mb-2">Dark/Light Mode</div>
+                <div className="text-xs text-muted mb-2">Code Editor Theme</div>
+                <div className="text-xs text-muted mb-2">UI Customization</div>
+              </div>
+            ]
           }
         ],
       }
