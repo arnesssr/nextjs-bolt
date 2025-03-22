@@ -1,12 +1,7 @@
 "use client"
 
 import * as React from "react"
-import {
-  Bot,
-  History,
-  PlusCircle,
-  Cog,
-} from "lucide-react"
+import { Bot, History, PlusCircle, Cog } from "lucide-react"
 
 import { NavMain } from "@/components/sidebar/nav-main"
 import {
@@ -101,7 +96,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       {
         title: "History",
         icon: History,
-        items:  [
+        items: [
           <div className="!bg-background !hover:bg-background !active:bg-background flex items-center h-full w-full justify-between max-w-full">
             {list.length === 0 && <div className="text-foreground">No previous conversations</div>}
             <DialogRoot open={dialogContent !== null}>
@@ -150,46 +145,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       },
       {
         title: "Settings",
+        url: "/settings",
         icon: Cog,
-        items: [
-          {
-            title: "Models",
-            items: [
-              <div key="models-container" className="!bg-background !hover:bg-background active:bg-background flex flex-col !w-full h-full items-center justify-center">
-                <div className="text-xs text-muted text-start">Anthropic Models</div>
-                {anthropicModels.map((model) => (
-                  <div
-                    key={model.id}
-                    className="!w-full py-1 cursor-pointer text-start text-foreground hover:text-accent hover:scale-105"
-                    onClick={() => setProvider({ type: ProviderType.ANTHROPIC, model })}
-                  >
-                    {model.displayName}
-                  </div>
-                ))}
-                <div className="text-xs text-muted text-start">Google Models</div>
-                {googleModels.map((model) => (
-                  <div
-                    key={model.id}
-                    className="!w-full py-1 cursor-pointer text-start text-foreground hover:text-accent hover:scale-105"
-                    onClick={() => setProvider({ type: ProviderType.GOOGLE, model })}
-                  >
-                    {model.displayName}
-                  </div>
-                ))}
-                <div className="text-xs text-muted text-start">TogetherAI Models</div>
-                {togetherModels.map((model) => (
-                  <div
-                    key={model.id}
-                    className="!w-full py-1 cursor-pointer text-start text-foreground hover:text-accent hover:scale-105"
-                    onClick={() => setProvider({ type: ProviderType.TOGETHER, model })}
-                  >
-                    {model.displayName}
-                  </div>
-                ))}
-              </div>
-            ]
-          }
-        ],
+        items: [] // Removed dropdown items since we now have a dedicated settings page
       }
     ],
     navSecondary: [] // Empty array since we don't need secondary nav
