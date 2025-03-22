@@ -2,6 +2,8 @@
 
 import React from 'react'
 import { ApiConfiguration, KnowledgeBase, ThemeSettings, SystemSettings } from '@/components/settings'
+import { MCPSettings } from '@/components/mcp/MCPSettings'
+import { AgentSettings } from '@/components/agents/AgentSettings'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 export default function Settings() {
@@ -12,6 +14,8 @@ export default function Settings() {
       <Tabs defaultValue="system" className="space-y-4">
         <TabsList>
           <TabsTrigger value="system">System</TabsTrigger>
+          <TabsTrigger value="mcp">MCP</TabsTrigger>
+          <TabsTrigger value="agents">Agents</TabsTrigger>
           <TabsTrigger value="api">API Configuration</TabsTrigger>
           <TabsTrigger value="knowledge">Knowledge Base</TabsTrigger>
           <TabsTrigger value="theme">Theme</TabsTrigger>
@@ -19,6 +23,14 @@ export default function Settings() {
 
         <TabsContent value="system" className="space-y-4">
           <SystemSettings />
+        </TabsContent>
+
+        <TabsContent value="mcp" className="space-y-4">
+          <MCPSettings />
+        </TabsContent>
+
+        <TabsContent value="agents" className="space-y-4">
+          <AgentSettings />
         </TabsContent>
 
         <TabsContent value="api" className="space-y-4">
