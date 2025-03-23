@@ -6,6 +6,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { useKnowledgeBase } from '@/features/knowledge-base/hooks/useKnowledgeBase';
 import { defaultPractices } from '@/features/knowledge-base/data/software-practices';
+import { ProjectRequirements } from '@/features/knowledge-base/components/ProjectRequirements';
 
 export function KnowledgeBase() {
   const { aiContext, updateAIContext } = useKnowledgeBase();
@@ -45,6 +46,8 @@ export function KnowledgeBase() {
           </div>
         </CardContent>
       </Card>
+
+      <ProjectRequirements />
 
       <Card>
         <CardHeader>

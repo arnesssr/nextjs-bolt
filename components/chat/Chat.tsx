@@ -19,6 +19,7 @@ import { useToast } from '@/hooks/use-toast';
 import { Check, WarningCircle } from '@phosphor-icons/react';
 import { useSpeechRecognition } from '@/hooks/useSpeechRecognition';
 import { useKnowledgeBase } from '@/features/knowledge-base/hooks/useKnowledgeBase';
+import { getSystemPrompt } from '@/lib/llm/prompts';
 
 const toastAnimation = cssTransition({
   enter: 'animated fadeInRight',
@@ -103,7 +104,7 @@ export const ChatImpl = memo(({ initialMessages, storeMessageHistory }: ChatProp
     initialMessages,
     body: {
       provider: provider,
-      context: getContextForPrompt(), // Add this line
+      context: getContextForPrompt(), // This context will be injected into the prompt
     },
   });
 

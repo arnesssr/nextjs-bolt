@@ -16,6 +16,18 @@ export interface UserInstruction {
   updated: Date;
 }
 
+export interface ProjectRequirement {
+  id: string;
+  title: string;
+  description: string;
+  framework?: string;
+  language?: string;
+  architecture?: 'modular' | 'monolithic' | 'microservices' | 'layered';
+  specificRequirements: string;
+  created: Date;
+  updated: Date;
+}
+
 export interface KnowledgeBaseState {
   practices: Practice[];
   userInstructions: UserInstruction[];
@@ -24,6 +36,10 @@ export interface KnowledgeBaseState {
     useDefaultPractices: boolean;
     useUserInstructions: boolean;
   };
+  projectRequirements: ProjectRequirement[];
+  activeFramework?: string;
+  activeLanguage?: string;
+  activeArchitecture?: string;
 }
 
 export const knowledgeBaseStore = atom<KnowledgeBaseState>({
@@ -33,7 +49,8 @@ export const knowledgeBaseStore = atom<KnowledgeBaseState>({
     enabled: true,
     useDefaultPractices: true,
     useUserInstructions: true
-  }
+  },
+  projectRequirements: []
 });
 
 // Actions
@@ -59,6 +76,27 @@ export const knowledgeBaseActions = {
         ...knowledgeBaseStore.get().aiContext,
         ...context
       }
+    });
+  },
+
+  addProjectRequirement: (requirement: Omit<ProjectRequirement, 'id' | 'created' | 'updated'>) => {
+    const newRequirement = {
+      ...requirement,
+      id: crypto.randomUUID(),
+      created: new Date(),
+      updated: new Date()
+    };
+
+    knowledgeBaseStore.set({
+      ...knowledgeBaseStore.get(),
+      projectRequirements: [...knowledgeBaseStore.get().projectRequirements, newRequirement]
+    });
+  },
+
+  setActiveFramework: (framework: string) => {
+    knowledgeBaseStore.set({
+      ...knowledgeBaseStore.get(),
+      activeFramework: framework
     });
   }
 };

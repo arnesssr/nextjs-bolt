@@ -92,3 +92,90 @@ export const defaultPractices: Practice[] = [
     tags: ['security', 'authentication', 'api', 'encryption']
   }
 ];
+
+export const frameworkStructures = {
+  'next.js': {
+    category: 'Framework Structure',
+    title: 'Next.js Project Structure',
+    content: `
+      1. Standard Next.js Structure:
+         /app                   # App router, pages and layouts
+         /components           # Reusable UI components
+         /lib                  # Utility functions, shared logic
+         /features            # Feature-based modules
+         /types               # TypeScript type definitions
+         /styles              # Global styles, CSS modules
+         /public              # Static assets
+         /tests               # Test files
+         
+      2. Feature-based Structure (for larger apps):
+         /features
+           /auth
+             /components
+             /api
+             /hooks
+             /utils
+           /dashboard
+             /components
+             /api
+             /hooks
+           /settings
+             /components
+             /api
+             /hooks
+    `,
+    tags: ['next.js', 'structure', 'organization']
+  },
+
+  'react': {
+    category: 'Framework Structure',
+    title: 'React Project Structure',
+    content: `
+      1. Component-Based Structure:
+         /src
+           /components        # Shared components
+           /pages            # Route components
+           /hooks            # Custom hooks
+           /services         # API calls, external services
+           /utils            # Helper functions
+           /assets           # Images, fonts, etc
+           /styles           # Global styles
+           
+      2. Feature-Based Structure:
+         /src
+           /features
+             /user
+               /components
+               /hooks
+               /api
+               /types
+             /product
+               /components
+               /hooks
+               /api
+           /shared           # Shared utilities and components
+    `,
+    tags: ['react', 'structure', 'organization']
+  }
+};
+
+export const architecturePatterns = {
+  modular: {
+    category: 'Architecture',
+    title: 'Modular Architecture',
+    content: `
+      1. Benefits:
+         - High cohesion, loose coupling
+         - Independent deployment
+         - Easier maintenance
+         - Better team scalability
+         
+      2. Best Used When:
+         - Large application
+         - Multiple teams
+         - Need for independent deployments
+         - Complex domain logic
+    `
+  },
+  // ... other architectures
+};
