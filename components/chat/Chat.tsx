@@ -18,6 +18,8 @@ import { debounce } from '@/utils/debounce';
 import { useToast } from '@/hooks/use-toast';
 import { Check, WarningCircle } from '@phosphor-icons/react';
 import { useSpeechRecognition } from '@/hooks/useSpeechRecognition';
+import { useKnowledgeBase } from '@/features/knowledge-base/hooks/useKnowledgeBase';
+import { getSystemPrompt } from '@/lib/llm/prompts';
 
 const toastAnimation = cssTransition({
   enter: 'animated fadeInRight',
@@ -84,6 +86,7 @@ export const ChatImpl = memo(({ initialMessages, storeMessageHistory }: ChatProp
   const [animationScope, animate] = useAnimate();
   const provider = useStore(providerStore);
   const { toast } = useToast();
+  const { getContextForPrompt } = useKnowledgeBase();
 
   const { messages, isLoading, input, handleInputChange, setInput, stop, append } = useChat({
     api: '/api/chat',
@@ -101,6 +104,7 @@ export const ChatImpl = memo(({ initialMessages, storeMessageHistory }: ChatProp
     initialMessages,
     body: {
       provider: provider,
+      context: getContextForPrompt(), // This context will be injected into the prompt
     },
   });
 
