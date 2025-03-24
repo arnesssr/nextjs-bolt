@@ -536,7 +536,7 @@ ULTRA IMPORTANT: Do NOT be verbose and do NOT explain anything unless explicitly
 </examples>
 `;
 
-export const CONTINUE_PROMPT = stripIndents\`
+export const CONTINUE_PROMPT = stripIndents`
   Continue your prior response. IMPORTANT: Immediately begin from where you left off without any interruptions.
   Do not repeat any content, including boltnextAction tags.
-\`;
+`;
